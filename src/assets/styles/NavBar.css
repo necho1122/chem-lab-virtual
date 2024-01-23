@@ -1,0 +1,138 @@
+/* Estilos base para el navbar */
+nav {
+	padding: 15px 0;
+}
+
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	gap: 1rem;
+}
+
+li {
+	display: inline-block;
+}
+
+a {
+	text-decoration: none;
+	color: #fff;
+	font-weight: bold;
+	padding: 10px;
+	transition: color 0.3s ease;
+}
+
+a:hover {
+	color: #ffd700;
+}
+
+@media screen and (max-width: 768px) {
+	ul {
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		padding-top: 20px;
+		background-color: #333; /* Ajusta el color de fondo según tu diseño */
+		z-index: 1000; /* Ajusta el valor según sea necesario */
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		transition: transform 0.3s ease-in-out; /* Agrega una transición para un efecto suave */
+		transform: translateY(
+			-100%
+		); /* Inicialmente, coloca el menú fuera de la pantalla */
+	}
+
+	ul.menu-active {
+		transform: translateY(
+			0
+		); /* Muestra el menú desplazándolo hacia la derecha */
+	}
+
+	li {
+		margin-bottom: 10px;
+	}
+
+	/* Estilos específicos para el icono del menú en modo responsivo */
+	.menu-icons {
+		cursor: pointer;
+	}
+
+	.menu-list {
+		display: none;
+	}
+
+	/* Estilos para el menú activo */
+	.menu-active.menu-show {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+}
+
+li > i {
+	color: #fff;
+}
+
+.close-icon {
+	display: none;
+}
+
+.close-icon:hover {
+	cursor: pointer;
+}
+
+.menu-icon-hide {
+	display: none;
+}
+
+@media screen and (min-width: 769px) {
+	/* Ocultar icono de barras en pantallas grandes */
+	.menu-icons {
+		display: none;
+	}
+}
+
+.dropdown-menu.show.dropdown-menu-dark {
+	display: flex;
+	flex-direction: column;
+}
+
+.dropdown {
+	display: none;
+	position: absolute;
+	top: 10%;
+	background-color: #555;
+	min-width: 160px;
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+	text-align: center;
+  }
+
+  li:hover .dropdown {
+	display: block;
+  }
+
+  .dropdown a {
+	color: white;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+  }
+
+  .dropdown .dpdw-one:hover {
+	background-color: #777;
+  }
+
+  li.dropdown-container{
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: center;
+	  align-items: center;
+  }
