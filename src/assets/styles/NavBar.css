@@ -1,9 +1,14 @@
 /* Estilos base para el navbar */
-nav {
+nav
+{
 	padding: 15px 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
 }
 
-ul {
+ul
+{
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
@@ -14,11 +19,13 @@ ul {
 	gap: 1rem;
 }
 
-li {
+li
+{
 	display: inline-block;
 }
 
-a {
+a
+{
 	text-decoration: none;
 	color: #fff;
 	font-weight: bold;
@@ -26,12 +33,15 @@ a {
 	transition: color 0.3s ease;
 }
 
-a:hover {
+a:hover
+{
 	color: #ffd700;
 }
 
-@media screen and (max-width: 768px) {
-	ul {
+@media screen and (max-width: 768px)
+{
+	ul
+	{
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
@@ -40,71 +50,97 @@ a:hover {
 		left: 0;
 		width: 100%;
 		padding-top: 20px;
-		background-color: #333; /* Ajusta el color de fondo según tu diseño */
-		z-index: 1000; /* Ajusta el valor según sea necesario */
+		background-color: #333;
+		/* Ajusta el color de fondo según tu diseño */
+		z-index: 1000;
+		/* Ajusta el valor según sea necesario */
 		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-		transition: transform 0.3s ease-in-out; /* Agrega una transición para un efecto suave */
-		transform: translateY(
-			-100%
-		); /* Inicialmente, coloca el menú fuera de la pantalla */
+		transition: transform 0.3s ease-in-out;
+		/* Agrega una transición para un efecto suave */
+		transform: translateY(-100%);
+		/* Inicialmente, coloca el menú fuera de la pantalla */
 	}
 
-	ul.menu-active {
-		transform: translateY(
-			0
-		); /* Muestra el menú desplazándolo hacia la derecha */
+	ul.menu-active
+	{
+		transform: translateY(0);
+		/* Muestra el menú desplazándolo hacia la derecha */
 	}
 
-	li {
+	li
+	{
 		margin-bottom: 10px;
 	}
 
 	/* Estilos específicos para el icono del menú en modo responsivo */
-	.menu-icons {
+	.menu-icons
+	{
 		cursor: pointer;
 	}
 
-	.menu-list {
+	.menu-list
+	{
 		display: none;
 	}
 
 	/* Estilos para el menú activo */
-	.menu-active.menu-show {
+	.menu-active.menu-show
+	{
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 	}
+
+	.responsive-navbar
+	{
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		width: 100%;
+		padding-right: 20px;
+		padding-left: 20px;
+	}
 }
 
-li > i {
+li>i
+{
 	color: #fff;
 }
 
-.close-icon {
+.close-icon
+{
 	display: none;
 }
 
-.close-icon:hover {
+.close-icon:hover
+{
 	cursor: pointer;
 }
 
-.menu-icon-hide {
+.menu-icon-hide
+{
 	display: none;
 }
 
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 769px)
+{
+
 	/* Ocultar icono de barras en pantallas grandes */
-	.menu-icons {
+	.menu-icons
+	{
 		display: none;
 	}
 }
 
-.dropdown-menu.show.dropdown-menu-dark {
+.dropdown-menu.show.dropdown-menu-dark
+{
 	display: flex;
 	flex-direction: column;
 }
 
-.dropdown {
+.dropdown
+{
 	display: none;
 	position: absolute;
 	top: 10%;
@@ -113,26 +149,44 @@ li > i {
 	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 	z-index: 1;
 	text-align: center;
-  }
+}
 
-  li:hover .dropdown {
+li:hover .dropdown
+{
 	display: block;
-  }
+}
 
-  .dropdown a {
+.dropdown a
+{
 	color: white;
 	padding: 12px 16px;
 	text-decoration: none;
 	display: block;
-  }
+}
 
-  .dropdown .dpdw-one:hover {
+.dropdown .dpdw-one:hover
+{
 	background-color: #777;
-  }
+}
 
-  li.dropdown-container{
-	  display: flex;
-	  flex-direction: column;
-	  justify-content: center;
-	  align-items: center;
-  }
+li.dropdown-container
+{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.chemical-logo
+{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+
+}
+
+.chemical-logo h2
+{
+	margin-left: 10px;
+	margin-right: 20px;
+}

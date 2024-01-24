@@ -14,6 +14,8 @@ function TitulacionAcidoBase() {
 	const [volSample, setVolSample] = useState("");
 	const [conSample, setConSample] = useState("");
 	const [onEquivalentPoint, setonEquivalentPoint] = useState(0);
+	const [showCompoundsSection, setShowCompoundsSection] = useState(false);
+	const [units, setUnits] = useState("");
 
 	const handleTitulacion = () => {
 		setTitulacion(<Beaker className="beaker" />);
@@ -66,14 +68,22 @@ function TitulacionAcidoBase() {
 	const equivalentPointResult = () => {
 		if (volTitrant.length === 0) {
 			setonEquivalentPoint(results.volume1);
+			setUnits("ml");
 		} else if (volSample.length === 0) {
 			setonEquivalentPoint(results.volume2);
+			setUnits("ml");
 		} else if (conTitrant.length === 0) {
 			setonEquivalentPoint(results.concentration1);
+			setUnits("M");
 		} else if (conSample.length === 0) {
 			setonEquivalentPoint(results.concentration2);
+			setUnits("M");
 		}
-	}
+	};
+
+	const handleShowCompounds = () => {
+		setShowCompoundsSection(!showCompoundsSection);
+	};
 
 	return (
 		<>
@@ -116,13 +126,13 @@ function TitulacionAcidoBase() {
 								/>
 							</label>
 							<label>
-									<input
-										type="text"
-										name="name"
-										placeholder="Concentración muestra"
-										value={conSample}
-										onChange={(e) => setConSample(e.target.value)}
-									/>
+								<input
+									type="text"
+									name="name"
+									placeholder="Concentración muestra"
+									value={conSample}
+									onChange={(e) => setConSample(e.target.value)}
+								/>
 							</label>
 						</div>
 					</form>
@@ -134,7 +144,17 @@ function TitulacionAcidoBase() {
 						Titular
 					</button>
 					<ProgressBar progress={progress} />
-					<DataHandler />
+
+					<div>
+						<button
+							onClick={handleShowCompounds}
+							type="button"
+							className="toggle-show-compounds"
+						>
+							{!showCompoundsSection ? "Agregar compuestos" : "Cerrar"}
+						</button>
+						{showCompoundsSection && <DataHandler />}
+					</div>
 					<div className="lab-tools">
 						<Bureta className="bureta" />
 						{titulacion}
@@ -142,7 +162,13 @@ function TitulacionAcidoBase() {
 
 					<div className={result}>
 						<h3>Resultados</h3>
-						<p>onEquivalentPoint: {onEquivalentPoint.toFixed(2)} ml</p>
+						{Number.isNaN(onEquivalentPoint) ? (
+							<p>Por favor ingrese los datos</p>
+						) : (
+							<p>
+								Resultado: {onEquivalentPoint.toFixed(2)} {units}
+							</p>
+						)}
 					</div>
 				</div>
 			</div>

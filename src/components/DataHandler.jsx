@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
 import "../assets/styles/DataHandler.css";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function DataHandler() {
 	const [data, setData] = useState([]);
@@ -61,71 +60,92 @@ function DataHandler() {
 		console.log(reactionComponents);
 	};
 
-    const resetReaction = () => {
-        setReactionComponents([]);
-    }
+	const resetReaction = () => {
+		setReactionComponents([]);
+	};
 
 	return (
 		<>
 			<div className="data-container">
-				<input
-					type="text"
-					id="search-compound"
-					placeholder="Buscar componentes"
-					onChange={handledSearch}
-				/>
-				{errorMessage && <p className="error-message">{errorMessage}</p>}
-				{data.PC_Compounds?.[0]?.props.map((item) => {
-					if (item.urn.name === "Allowed") {
-						return (
-							<div key={item.urn.name}>
-								<h4>Compuesto</h4>
-								<p>{item.value.sval}</p>
-							</div>
-						);
-					}
+				<div className="search-bar">
+					<input
+						type="text"
+						id="search-compound"
+						placeholder="Buscar componentes"
+						onChange={handledSearch}
+					/>
+				</div>
+				<div className="search-results">
+					{errorMessage && <p className="error-message">{errorMessage}</p>}
+					{data.PC_Compounds?.[0]?.props.map((item) => {
+						if (item.urn.name === "Allowed") {
+							return (
+								<div key={item.urn.name}>
+									<h4>{item.value.sval}</h4>
+								</div>
+							);
+						}
 
-					if (item.urn.label === "Molecular Weight") {
-						return (
-							<div key={item.urn.label}>
-								<h4>{item.urn.label}</h4>
-								<p id="molecular-weight">{item.value.sval}</p>
-							</div>
-						);
-					}
+						if (item.urn.label === "Molecular Weight") {
+							return (
+								<div className="pm-result" key={item.urn.label}>
+									<p style={{ marginRight: "10px", padding: "0" }}>PM: </p>
+									<p id="molecular-weight">
+										{parseFloat(item.value.sval).toFixed(2)} g/mol
+									</p>
+								</div>
+							);
+						}
 
-					if (item.urn.label === "Molecular Formula") {
-						return (
-							<div key={item.urn.label}>
-								<h4>{item.urn.label}</h4>
-								<p id="molecular-formula">{item.value.sval}</p>
-							</div>
-						);
-					}
-					return null;
-				})}
-				<button type="button" onClick={addToReaction}>
-					Agregar
-				</button>
-				<button type="button" onClick={resetReaction}>Reset</button>
-			</div>
-			<div className="add-to-reaction">
-				<div className="reactive-one">
-					<p>{reactionComponents[0]?.formula}</p>
-					<p>{reactionComponents[0]?.weight}</p>
+						if (item.urn.label === "Molecular Formula") {
+							return (
+								<div className="mf-result" key={item.urn.label}>
+									<p style={{ marginRight: "10px", padding: "0" }}>Formula:</p>
+									<p id="molecular-formula">{item.value.sval}</p>
+								</div>
+							);
+						}
+						return null;
+					})}
+					{data.PC_Compounds ? (
+						<div>
+							<button
+								type="button"
+								onClick={addToReaction}
+								className="add-compounds"
+							>
+								Agregar
+							</button>
+						</div>
+					) : null}
 				</div>
-				<div className="plus-components">
-					{reactionComponents[1]?.formula && <p>+</p>}
-				</div>
-				<div className="reactive-two">
-					<p>{reactionComponents[1]?.formula}</p>
-					<p>{reactionComponents[1]?.weight}</p>
-				</div>
-				<div className="plus-components">
-					{reactionComponents[1]?.formula && <p>---{">"}</p>}
-				</div>
-                <div className="plus-components">
-					{reactionComponents[1]?.formula && <p>Producto</p>}
+				<div className="add-to-reaction-container">
+					<div className="add-to-reaction">
+						<div className="reactive-one">
+							<p>{reactionComponents[0]?.formula}</p>
+						</div>
+						<div className="plus-components">
+							{reactionComponents[1]?.formula && <p>+</p>}
+						</div>
+						<div className="reactive-two">
+							<p>{reactionComponents[1]?.formula}</p>
+						</div>
+						<div className="plus-components">
+							{reactionComponents[1]?.formula && <p>---{">"}</p>}
+						</div>
+						<div className="plus-components">
+							{reactionComponents[1]?.formula && <p>Producto</p>}
+						</div>
+					</div>
+					{reactionComponents[0]?.formula && (
+						<button
+							type="button"
+							onClick={resetReaction}
+							className="reset-reaction"
+						>
+							Reset
+						</button>
+					)}
 				</div>
 			</div>
 		</>
