@@ -16,6 +16,7 @@ function TitulacionAcidoBase() {
 	const [onEquivalentPoint, setonEquivalentPoint] = useState(0);
 	const [showCompoundsSection, setShowCompoundsSection] = useState(false);
 	const [units, setUnits] = useState("");
+	const [typeOfValue, setTypeOfValue] = useState("");
 
 	const handleTitulacion = () => {
 		setTitulacion(<Beaker className="beaker" />);
@@ -68,15 +69,19 @@ function TitulacionAcidoBase() {
 	const equivalentPointResult = () => {
 		if (volTitrant.length === 0) {
 			setonEquivalentPoint(results.volume1);
+			setTypeOfValue("Volumen titulante");
 			setUnits("ml");
 		} else if (volSample.length === 0) {
 			setonEquivalentPoint(results.volume2);
+			setTypeOfValue("Volumen muestra");
 			setUnits("ml");
 		} else if (conTitrant.length === 0) {
 			setonEquivalentPoint(results.concentration1);
+			setTypeOfValue("Concentración titulante");
 			setUnits("M");
 		} else if (conSample.length === 0) {
 			setonEquivalentPoint(results.concentration2);
+			setTypeOfValue("Concentración muestra");
 			setUnits("M");
 		}
 	};
@@ -166,7 +171,8 @@ function TitulacionAcidoBase() {
 							<p>Por favor ingrese los datos</p>
 						) : (
 							<p>
-								Resultado: {onEquivalentPoint.toFixed(2)} {units}
+								{`${typeOfValue}: `}
+								<b>{`${onEquivalentPoint.toFixed(2)} ${units}`}</b>
 							</p>
 						)}
 					</div>
