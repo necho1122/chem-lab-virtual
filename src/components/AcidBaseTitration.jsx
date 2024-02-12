@@ -1,11 +1,11 @@
-import "../assets/styles/Titulacion.css";
+import "../assets/styles/Titration.css";
 import { Beaker, Bureta, SampleOne } from "./Icons";
 import { useState } from "react";
-import { ProgressBar } from "./ToolsAndAccessories";
+import { ProgressBar, PreviousNotes } from "./ToolsAndAccessories";
 import NavBar from "./NavBar";
 import DataHandler from "./DataHandler";
 
-function TitulacionAcidoBase() {
+function AcidBaseTitration() {
 	const [titulacion, setTitulacion] = useState(<SampleOne />);
 	const [progress, setProgress] = useState(0);
 	const [result, setResult] = useState("result-hidden");
@@ -17,6 +17,7 @@ function TitulacionAcidoBase() {
 	const [showCompoundsSection, setShowCompoundsSection] = useState(false);
 	const [units, setUnits] = useState("");
 	const [typeOfValue, setTypeOfValue] = useState("");
+	const [showPreviousNotes, setShowPreviousNotes] = useState(false);
 
 	const handleTitulacion = () => {
 		setTitulacion(<Beaker className="beaker" />);
@@ -90,6 +91,10 @@ function TitulacionAcidoBase() {
 		setShowCompoundsSection(!showCompoundsSection);
 	};
 
+	const handlePreviousNotes = () => {
+		setShowPreviousNotes(!showPreviousNotes);
+	};
+
 	return (
 		<>
 			<NavBar />
@@ -141,14 +146,23 @@ function TitulacionAcidoBase() {
 							</label>
 						</div>
 					</form>
-					<button
-						type="button"
-						onClick={handleButtonClick}
-						className="titration-button"
-					>
-						Titular
-					</button>
+					<div className="button-and-note">
+						<button
+							type="button"
+							onClick={handleButtonClick}
+							className="titration-button"
+						>
+							Titular
+						</button>
+						<button type="button" className="circle" onClick={handlePreviousNotes}>
+							&#10067;
+						</button>
+					</div>
 					<ProgressBar progress={progress} />
+					{showPreviousNotes && <div className="previous-notes-modal">
+							<button type="button" onClick={handlePreviousNotes} className="previous-notes-modal-close">X</button>
+						<PreviousNotes />
+					</div>}
 
 					<div>
 						<button
@@ -182,4 +196,4 @@ function TitulacionAcidoBase() {
 	);
 }
 
-export default TitulacionAcidoBase;
+export default AcidBaseTitration;

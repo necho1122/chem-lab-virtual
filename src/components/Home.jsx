@@ -1,5 +1,5 @@
 import NavBar  from "./NavBar";
-import TitulacionAcidoBase from './TitulacionAcidoBase';
+import AcidBaseTitration from './AcidBaseTitration';
 import '../assets/styles/Home.css'
 
 function Home () {
