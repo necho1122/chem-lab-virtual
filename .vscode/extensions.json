@@ -1,6 +1,7 @@
 {
 	"recommendations": [
 		"streetsidesoftware.code-spell-checker-spanish",
-		"bierner.emojisense"
+		"bierner.emojisense",
+		"github.copilot-chat"
 	]
 }
