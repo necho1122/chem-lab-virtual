@@ -29,7 +29,7 @@ Este proyecto es un laboratorio virtual de última generación desarrollado en R
 1. Clona el repositorio:
 
 ```
-git clone https://github.com/tu_usuario/laboratorio_virtual_quimica.git
+git clone https://github.com/necho1122/chem-lab-virtual.git
 ```
 
 2. Instala las dependencias:
