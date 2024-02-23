@@ -80,3 +80,46 @@
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
     border-radius: 10px;
 }
+
+.ph-calculator-title
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+
+}
+
+.ph-calculator-title span p
+{
+    height: 20px;
+    width: 20px;
+    border: 2px solid #575757;
+    border-radius: 50%;
+    text-align: center;
+    font-weight: bold;
+    padding: 0px 2px 4px 2px;
+    margin-left: 10px;
+}
+
+.ph-calculator-title span p:hover
+{
+    background-color: #575757;
+    color: #222;
+}
+
+.ph-message
+{
+    position: absolute;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    background-color: #e9e4e4;
+    border-radius: 10px;
+    padding: 10px;
+}

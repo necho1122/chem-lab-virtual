@@ -8,6 +8,7 @@ function Calc() {
 	const [moleCalcVisible, setMoleCalcVisible] = useState(false);
 	const [molarityCalcVisible, setMolarityCalcVisible] = useState(false);
 	const [normalityCalcVisible, setNormalityCalcVisible] = useState(false);
+	const [solutionCalcVisible, setSolutionCalcVisible] = useState(false);
 
 	const toggleHpCalc = () => {
 		setPhCalcVisible(!phCalcVisible);
@@ -23,6 +24,10 @@ function Calc() {
 
 	const handleNormalityCalc = () => {
 		setNormalityCalcVisible(!normalityCalcVisible);
+	};
+
+	const handleSolutionCalc = () => {
+		setSolutionCalcVisible(!solutionCalcVisible);
 	};
 
 	return (
@@ -56,15 +61,18 @@ function Calc() {
 						<button type="button" onClick={handleNormalityCalc}>
 							Ir a calcular
 						</button>
-					</div>
-					<div className="calc">
-						<h3>Calculadora de soluciones</h3>
-						<p>Calcula la cantidad de soluto necesaria...</p>
-						<button type="button" href="/solution-calc">
-							Ir a calcular
-						</button>
 						{normalityCalcVisible && (
 							<NormalityCalc onClose={handleNormalityCalc} />
+						)}
+					</div>
+					<div className="calc">
+						<h3>Otras concentraciones</h3>
+						<p>Calcula la cantidad de soluto necesaria...</p>
+						<button type="button" onClick={handleSolutionCalc}>
+							Ir a calcular
+						</button>
+						{solutionCalcVisible && (
+							<SolutionCalc onClose={handleSolutionCalc} />
 						)}
 					</div>
 					<div className="calc">
@@ -89,6 +97,7 @@ function PHCalculator(props) {
 	const [acidity, setAcidity] = useState("ácido");
 	const [concentration, setConcentration] = useState("");
 	const [result, setResult] = useState("");
+	const [showPhMessage, setShowPhMessage] = useState(false);
 
 	const handleAcidityChange = (event) => {
 		setAcidity(event.target.value);
@@ -115,10 +124,26 @@ function PHCalculator(props) {
 		}
 	};
 
+	const handlePhMessage = () => {
+		setShowPhMessage(!showPhMessage);
+	};
+
 	return (
 		<div className="calc-container">
 			<div className="calculator-container">
-				<h2>Calculadora de pH</h2>
+				<div className="ph-calculator-title">
+					<h2>Calculadora de pH</h2>
+					<span>
+						<p onMouseEnter={handlePhMessage} onMouseLeave={handlePhMessage}>
+							?
+						</p>
+					</span>
+					{showPhMessage && (
+						<p className="ph-message">
+							Solo para soluciones acuosas o diluidas
+						</p>
+					)}
+				</div>
 				<div>
 					<label>
 						Tipo de solución:{" "}
@@ -143,8 +168,7 @@ function PHCalculator(props) {
 				</button>
 				<div>
 					<p>
-						Resultado:{" "}
-						<b>{result === "" ? "Introduce los datos" : result}</b>
+						Resultado: <b>{result === "" ? "Introduce los datos" : result}</b>
 					</p>
 				</div>
 				<button type="button" onClick={props.onClose}>
@@ -262,8 +286,31 @@ function NormalityCalc(props) {
 	);
 }
 
-function SolutionCalc() {
-	return <div>s</div>;
+function SolutionCalc(props) {
+	const [concentration, setConcentration] = useState("");
+
+	return (
+		<div className="calc-container">
+			<div className="calculator-container">
+				<h2>Otras concentraciones</h2>
+				<label>
+					Concentración:{" "}
+					<select value={concentration}>
+						<option value="mass-mass">Masa / Masa</option>
+						<option value="mass-volume">Masa / Volumen</option>
+						<option value="volume-volume">volumen / volumen</option>
+						<option value="ppm">Partes por millón</option>
+						<option value="mole-fraction">Fracción molar</option>
+						<option value="mass-fraction">Fracción en masa</option>
+					</select>
+				</label>
+				<p>En construcción...</p>
+				<button type="button" onClick={props.onClose}>
+					Cerrar
+				</button>
+			</div>
+		</div>
+	);
 }
 
 function MolecularWeightCalc(props) {
