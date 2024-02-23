@@ -137,6 +137,14 @@ function DataHandler() {
 							{reactionComponents[1]?.formula && <p>Producto</p>}
 						</div>
 					</div>
+					<div>
+						{reactionComponents[0]?.weight && (
+							<p>{reactionComponents[0]?.weight}</p>
+						)}
+						{reactionComponents[1]?.weight && (
+							<p>{reactionComponents[1]?.weight}</p>
+						)}
+					</div>
 					{reactionComponents[0]?.formula && (
 						<button
 							type="button"

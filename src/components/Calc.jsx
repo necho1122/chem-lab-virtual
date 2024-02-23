@@ -4,15 +4,25 @@ import { useState } from "react";
 import DataHandler from "./DataHandler";
 
 function Calc() {
-	const [hpCalc, setHpCalc] = useState(false);
-	const [moleCalc, setMoleCalc] = useState(false);
+	const [phCalcVisible, setPhCalcVisible] = useState(false);
+	const [moleCalcVisible, setMoleCalcVisible] = useState(false);
+	const [molarityCalcVisible, setMolarityCalcVisible] = useState(false);
+	const [normalityCalcVisible, setNormalityCalcVisible] = useState(false);
 
-	const handleHpCalc = () => {
-		setHpCalc(!hpCalc);
+	const toggleHpCalc = () => {
+		setPhCalcVisible(!phCalcVisible);
 	};
 
 	const handleMoleCalc = () => {
-		setMoleCalc(!moleCalc);
+		setMoleCalcVisible(!moleCalcVisible);
+	};
+
+	const handleMolarityCalc = () => {
+		setMolarityCalcVisible(!molarityCalcVisible);
+	};
+
+	const handleNormalityCalc = () => {
+		setNormalityCalcVisible(!normalityCalcVisible);
 	};
 
 	return (
@@ -20,27 +30,30 @@ function Calc() {
 			<NavBar />
 
 			<h1>Calculadoras</h1>
-			<div className="calc-container">
+			<div className="big-calc-container">
 				<div className="container-of-calcs">
 					<div className="calc">
 						<h3>Calculadora de pH</h3>
 						<p>Calcula el pH de una solución ácida o básica.</p>
-						<button type="button" onClick={handleHpCalc}>
+						<button type="button" onClick={toggleHpCalc}>
 							Ir a calcular
 						</button>
-						{hpCalc && <PHCalculator closeHPCalc={handleHpCalc} />}
+						{phCalcVisible && <PHCalculator onClose={toggleHpCalc} />}
 					</div>
 					<div className="calc">
 						<h3>Calculadora de molaridad</h3>
 						<p>Calcula la molaridad de una solución.</p>
-						<button type="button" href="/molarity-calc">
+						<button type="button" onClick={handleMolarityCalc}>
 							Ir a calcular
 						</button>
+						{molarityCalcVisible && (
+							<MolarityCalc onClose={handleMolarityCalc} />
+						)}
 					</div>
 					<div className="calc">
 						<h3>Calculadora de normalidad</h3>
 						<p>Calcula la normalidad de una solución.</p>
-						<button type="button" href="/normality-calc">
+						<button type="button" onClick={handleNormalityCalc}>
 							Ir a calcular
 						</button>
 					</div>
@@ -50,6 +63,9 @@ function Calc() {
 						<button type="button" href="/solution-calc">
 							Ir a calcular
 						</button>
+						{normalityCalcVisible && (
+							<NormalityCalc onClose={handleNormalityCalc} />
+						)}
 					</div>
 					<div className="calc">
 						<h3>Calculadora de peso molecular</h3>
@@ -57,7 +73,9 @@ function Calc() {
 						<button type="button" onClick={handleMoleCalc}>
 							Ir a calcular
 						</button>
-						{moleCalc && <MolecularWeightCalc />}
+						{moleCalcVisible && (
+							<MolecularWeightCalc onClose={handleMoleCalc} />
+						)}
 					</div>
 				</div>
 			</div>
@@ -68,32 +86,32 @@ function Calc() {
 export default Calc;
 
 function PHCalculator(props) {
-	const [acidez, setAcidez] = useState("acido");
-	const [concentracion, setConcentracion] = useState("");
-	const [resultado, setResultado] = useState("");
+	const [acidity, setAcidity] = useState("ácido");
+	const [concentration, setConcentration] = useState("");
+	const [result, setResult] = useState("");
 
-	const handleAcidezChange = (event) => {
-		setAcidez(event.target.value);
+	const handleAcidityChange = (event) => {
+		setAcidity(event.target.value);
 	};
 
-	const handleConcentracionChange = (event) => {
-		setConcentracion(event.target.value);
+	const handleConcentrationChange = (event) => {
+		setConcentration(event.target.value);
 	};
 
-	const calcularPH = () => {
-		if (!concentracion || Number.isNaN(concentracion)) {
-			setResultado("Por favor, introduce una concentración válida.");
+	const calcPH = () => {
+		if (!concentration || Number.isNaN(concentration)) {
+			setResult("Por favor, introduce una concentración válida.");
 			return;
 		}
 
-		const concFloat = parseFloat(concentracion);
+		const concFloat = parseFloat(concentration);
 
-		if (acidez === "acido") {
-			setResultado(-Math.log10(concFloat));
-		} else if (acidez === "base") {
-			setResultado(14 + Math.log10(concFloat));
+		if (acidity === "ácido") {
+			setResult((-Math.log10(concFloat)).toFixed(4));
+		} else if (acidity === "base") {
+			setResult((14 + Math.log10(concFloat)).toFixed(4));
 		} else {
-			setResultado("Tipo de solución no válido");
+			setResult("Tipo de solución no válido");
 		}
 	};
 
@@ -104,8 +122,8 @@ function PHCalculator(props) {
 				<div>
 					<label>
 						Tipo de solución:{" "}
-						<select value={acidez} onChange={handleAcidezChange}>
-							<option value="acido">Ácido</option>
+						<select value={acidity} onChange={handleAcidityChange}>
+							<option value="ácido">Ácido</option>
 							<option value="base">Base</option>
 						</select>
 					</label>
@@ -115,18 +133,21 @@ function PHCalculator(props) {
 						Concentración (M):
 						<input
 							type="text"
-							value={concentracion}
-							onChange={handleConcentracionChange}
+							value={concentration}
+							onChange={handleConcentrationChange}
 						/>
 					</label>
 				</div>
-				<button type="button" onClick={calcularPH}>
+				<button type="button" onClick={calcPH}>
 					Calcular pH
 				</button>
 				<div>
-					<p>Resultado: {resultado}</p>
+					<p>
+						Resultado:{" "}
+						<b>{result === "" ? "Introduce los datos" : result}</b>
+					</p>
 				</div>
-				<button type="button" onClick={props.closeHPCalc}>
+				<button type="button" onClick={props.onClose}>
 					Cerrar{" "}
 				</button>
 			</div>
@@ -134,25 +155,127 @@ function PHCalculator(props) {
 	);
 }
 
-function MolarityCalc() {
-	return <div>m</div>;
+function MolarityCalc(props) {
+	const [volume, setVolume] = useState("");
+	const [mol, setMol] = useState("");
+	const [result, setResult] = useState("");
+
+	const handleVolumeChange = (event) => {
+		setVolume(event.target.value);
+	};
+
+	const handleMolChange = (event) => {
+		setMol(event.target.value);
+	};
+
+	const calcMolarity = () => {
+		if (!volume || !mol || Number.isNaN(volume) || Number.isNaN(mol)) {
+			return;
+		}
+
+		const volFloat = parseFloat(volume);
+		const molFloat = parseFloat(mol);
+
+		setResult((molFloat / volFloat).toFixed(4));
+	};
+
+	return (
+		<div className="calc-container">
+			<div className="calculator-container">
+				<h2>Molaridad</h2>
+				<p>Calcula la molaridad de una solución</p>
+				<label>
+					Moles de soluto:
+					<input onChange={handleMolChange} value={mol} type="text" />
+				</label>
+				<label>
+					Volumen de la solución (L):
+					<input onChange={handleVolumeChange} value={volume} type="text" />
+				</label>
+				<button type="button" onClick={calcMolarity}>
+					Calcular
+				</button>
+				<p>
+					Resultado: <b>{result}</b> mol/L{" "}
+				</p>
+				<button type="button" onClick={props.onClose}>
+					Cerrar
+				</button>
+			</div>
+		</div>
+	);
 }
 
-function NormalityCalc() {
-	return <div>n</div>;
+function NormalityCalc(props) {
+	const [eqWeight, setEqWeight] = useState("");
+	const [volume, setVolume] = useState("");
+	const [result, setResult] = useState("");
+
+	const handleEqWeightChange = (event) => {
+		setEqWeight(event.target.value);
+	};
+
+	const handleVolumeChange = (event) => {
+		setVolume(event.target.value);
+	};
+
+	const calcNormality = () => {
+		if (
+			!eqWeight ||
+			!volume ||
+			Number.isNaN(eqWeight) ||
+			Number.isNaN(volume)
+		) {
+			return;
+		}
+
+		const eqWeightFloat = parseFloat(eqWeight);
+		const volumeFloat = parseFloat(volume);
+
+		setResult((eqWeightFloat / volumeFloat).toFixed(4));
+	};
+
+	return (
+		<div className="calc-container">
+			<div className="calculator-container">
+				<h2>Normalidad</h2>
+				<p>Calcula la normalidad de una solución</p>
+				<label>
+					Peso equivalente:
+					<input onChange={handleEqWeightChange} value={eqWeight} type="text" />
+				</label>
+				<label>
+					Volumen de la solución (L):
+					<input onChange={handleVolumeChange} value={volume} type="text" />
+				</label>
+				<button type="button" onClick={calcNormality}>
+					Calcular
+				</button>
+				<p>
+					Resultado: <b>{result}</b> eq/L{" "}
+				</p>
+				<button type="button" onClick={props.onClose}>
+					Cerrar
+				</button>
+			</div>
+		</div>
+	);
 }
 
 function SolutionCalc() {
 	return <div>s</div>;
 }
 
-function MolecularWeightCalc() {
+function MolecularWeightCalc(props) {
 	return (
 		<div className="calc-container">
 			<div className="calculator-container">
 				<h2>Peso molecular</h2>
 				<p>Escribe la formula molecular del compuesto</p>
 				<DataHandler />
+				<button type="button" onClick={props.onClose}>
+					Cerrar
+				</button>
 			</div>
 		</div>
 	);
