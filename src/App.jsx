@@ -1,7 +1,7 @@
 import "./App.css";
 import Home from "./components/Home";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import AcidBaseTitration from "./components/AcidBaseTitration";
+import AcidBaseTitration from "./components/titration/AcidBaseTitration";
 import DataHandler from "./components/DataHandler";
 import Calc from "./components/Calc";
 import Contact from "./components/Contact";
