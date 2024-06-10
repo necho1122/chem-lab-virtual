@@ -2,7 +2,6 @@ import "../../assets/styles/Titration.css";
 import { Beaker, Bureta, SampleOne } from "../Icons";
 import { useState } from "react";
 import { ProgressBar, PreviousNotes } from "../ToolsAndAccessories";
-import NavBar from "../NavBar";
 import DataHandler from "../DataHandler";
 import TitrationForm from "./TitrationForm";
 import Results from "./Results";
@@ -41,7 +40,9 @@ function AcidBaseTitration() {
   };
 
   const showResult = () => {
+	setResult("result-hidden");
     setTimeout(() => {
+		
       setResult("result-container");
     }, 2000);
   };
@@ -99,7 +100,6 @@ function AcidBaseTitration() {
 
   return (
     <>
-      <NavBar />
       <div className="titration-container">
         <div className="titration-section-container">
           <h2>Titulación Ácido Base</h2>
@@ -129,6 +129,7 @@ function AcidBaseTitration() {
               <PreviousNotes />
             </div>
           )}
+			{showCompoundsSection && <DataHandler />}
           <div className="lab-tools">
             <Bureta className="bureta" />
             {titulacion}
@@ -139,7 +140,7 @@ function AcidBaseTitration() {
             typeOfValue={typeOfValue}
             units={units}
           />
-          {showCompoundsSection && <DataHandler />}
+         
         </div>
       </div>
     </>
