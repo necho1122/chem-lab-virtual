@@ -8,6 +8,8 @@ import Contact from './components/Contact';
 import AboutUs from './components/AboutUs';
 import MassBalance from './components/MassBalance/MassBalance';
 import NavBar from './components/NavBar';
+import Documentation from './components/docs/Documentation';
+import MassBalanceDoc from './components/docs/MassBalanceDoc';
 
 function App() {
 	return (
@@ -43,6 +45,15 @@ function App() {
 						path='/balance'
 						element={<MassBalance />}
 					/>
+					<Route
+						path='/docs'
+						element={<Documentation />}
+					>
+						<Route
+							path='mass-balance-docs'
+							element={<MassBalanceDoc />}
+						/>
+					</Route>
 				</Routes>
 			</Router>
 		</>

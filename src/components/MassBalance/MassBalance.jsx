@@ -18,6 +18,7 @@ function BalanceCalculator() {
 			<select
 				value={selectedCase}
 				onChange={handleSelectChange}
+				className='select'
 			>
 				<option value=''>Seleccione un caso</option>
 				<option value='1'>Entrada + Acumulado = Salida</option>
