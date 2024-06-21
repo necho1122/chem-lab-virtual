@@ -11,10 +11,9 @@ function AboutUs() {
 				<h2>¿Quiénes somos?</h2>
 				<p>
 					Somos un equipo apasionado por la química y la educación, que ha
-					creado un laboratorio virtual de última generación para estudiantes y
-					entusiastas de la ciencia. Nuestra plataforma, desarrollada en React,
-					ofrece una experiencia de aprendizaje inmersiva y completa que te
-					permite:
+					creado un laboratorio virtual para estudiantes y entusiastas de la
+					ciencia. Nuestra plataforma, desarrollada en React, ofrece una
+					experiencia de aprendizaje inmersiva y completa que te permite:
 				</p>{' '}
 				<p>
 					• Simular pruebas de laboratorio de manera virtual: Realiza
@@ -58,11 +57,6 @@ function AboutUs() {
 					cuidadosamente desarrollados por expertos en química para garantizar
 					su precisión y confiabilidad.
 				</p>{' '}
-				<p>
-					• Acceso ilimitado: Suscríbete a nuestro plan premium y disfruta de
-					acceso completo a todas las funciones y recursos de nuestro
-					laboratorio virtual.
-				</p>
 				<h3>
 					¿Estás listo para sumergirte en el fascinante mundo de la química?
 				</h3>{' '}

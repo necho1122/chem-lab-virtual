@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+/* eslint-disable react/prop-types */
+import { useState, useEffect } from 'react';
 import '../assets/styles/ToolsAndAccessories.css';
 
 export const ProgressBar = ({ progress }) => {
@@ -13,13 +14,13 @@ export const ProgressBar = ({ progress }) => {
 	}, [progress]);
 
 	return (
-		<div className={`${isVisible ? "progress-bar" : "progress-bar-hidden"}`}>
+		<div className={`${isVisible ? 'progress-bar' : 'progress-bar-hidden'}`}>
 			{isVisible && (
 				<div
 					style={{
 						width: `${progress}%`,
-						height: "20px",
-						background: "#4CAF50",
+						height: '20px',
+						background: '#4CAF50',
 					}}
 				>
 					{progress > 0 && <span>{progress}%</span>}
@@ -31,11 +32,11 @@ export const ProgressBar = ({ progress }) => {
 
 export const PreviousNotes = () => {
 	return (
-		<div className="previous-notes">
+		<div className='previous-notes'>
 			<h3>Nota:</h3>
 			<p>
-				Dejar en blanco el valor que se desea calcular y si requiere de un
-				cálculo previo, visite las otras secciones!
+				Dejar en blanco (sin llenar) el valor que se desea calcular y si
+				requiere de un cálculo previo, visite las otras secciones!
 			</p>
 		</div>
 	);
